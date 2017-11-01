@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="fragments/fragment :: title('View All Student')"></div>
+		<link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}"/>	
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#student-list').DataTable();
+			});
+		</script>
+	</head>
+    <body>
+        <h1>All Students</h1>
+        
+    	<!-- <div th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd}?'odd'"> -->
+    	<!-- 
+    		value yg dihasilkan iterationStatus.odd akan TRUE jika index ganjil, dan akan FALSE jika index genap.
+    		th:class digunakan untuk memberikan class specific pada iterasi dengan index tertentu.
+    		Penggunaan lebih lanjut dapat diimplementasikan untuk javascript
+    	-->
+    	 
+    	 <table id="student-list">
+    	 	<thead>
+				<tr>
+					<th>No.</th>
+					<th>NPM</th>
+					<th>Name</th>
+					<th>GPA</th>
+					<th>Cumlaude</th>
+					<th>Delete</th>
+					<th>Update</th>
+				</tr>
+			</thead>
+			<tbody>
+				<div th:each="student,iterationStatus: ${students}">
+					<tr>
+						<td th:text="${iterationStatus.count}"></td>
+						<td th:text="${student.npm}"></td>
+						<td th:text="${student.name}"></td>
+						<td th:text="${student.gpa}"></td>
+						<td th:text="${student.gpa>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan!'"></td>
+						<td>
+							<a th:href="'/student/delete/' + ${student.npm}" >Delete Data</a>
+						</td>
+						<td>
+							<a th:href="'/student/update/' + ${student.npm}" >Update Data</a><br/>
+						</td>
+					</tr>
+				</div>
+			</tbody>
+    	 </table>
+    </body>
+</html>
