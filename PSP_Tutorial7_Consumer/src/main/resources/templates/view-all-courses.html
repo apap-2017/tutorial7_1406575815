@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="fragments/fragment :: title('View All Courses')"></div>
+		<link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}"/>	
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/jquery.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#courses-list').DataTable();
+			});
+		</script>
+	</head>
+    <body>
+        <h1>All Courses</h1> 
+    	 <table id="courses-list">
+    	 	<thead>
+				<tr>
+					<th>No.</th>
+					<th>ID Course</th>
+					<th>Name</th>
+					<th>Credit</th>
+					<th>Detail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<div th:each="course,iterationStatus: ${courses}">
+					<tr>
+						<td th:text="${iterationStatus.count}"></td>
+						<td th:text="${course.id_course}"></td>
+						<td th:text="${course.name}"></td>
+						<td th:text="${course.credits}"></td>
+						<td>
+							<a th:href="'/course/view/' + ${course.id_course}" >Detail</a>
+						</td>
+					</tr>
+				</div>
+			</tbody>
+    	 </table>
+    </body>
+</html>
