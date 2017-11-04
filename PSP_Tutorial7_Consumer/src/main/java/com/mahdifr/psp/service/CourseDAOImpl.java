@@ -28,6 +28,4 @@ public class CourseDAOImpl implements CourseDAO{
 				List.class);
 		return courses;
 	}
-	
-	
 }
